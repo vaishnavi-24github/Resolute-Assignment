@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+
+# Environment variables
+.env
+*.env
+
+# Logs and temporary files
+logs/
+*.log
+*.sqlite3
+
+# System/IDE-specific files
+.DS_Store
+.vscode/
+.idea/
+*.iml
+
+# Python test artifacts
+test-reports/
+.coverage
+pytest_cache/
+
+# Docker-related files
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes artifacts
+kubernetes/
+*.yaml
+
+# Node.js dependencies (if frontend added)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Ignore built distributions
+dist/
+build/
+
+# GitHub Actions workflows cache
+.github/workflows/*

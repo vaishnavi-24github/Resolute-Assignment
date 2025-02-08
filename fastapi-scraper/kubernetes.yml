@@ -1,0 +1,25 @@
+yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-scraper
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-scraper
+  template:
+    metadata:
+      labels:
+        app: fastapi-scraper
+    spec:
+      containers:
+        - name: fastapi-app
+          image: mydockerhub/fastapi-scraper:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: "postgresql://user:password@postgres:5432/db"
+            - name: REDIS_URL
+              value: "redis://redis_queue:6379/0"

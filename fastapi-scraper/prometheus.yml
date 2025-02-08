@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s  # How often to scrape targets
+
+scrape_configs:
+  - job_name: 'fastapi-scraper'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['fastapi-scraper:8000']  # Replace with your service name or IP
+
+  - job_name: 'celery'
+    static_configs:
+      - targets: ['celery-exporter:9808']  # If using Celery Exporter
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']  # If using Redis Exporter

@@ -1,0 +1,70 @@
+{
+    "info": {
+      "_postman_id": "12345678-abcd-efgh-ijkl-9876543210",
+      "name": "FastAPI Scraper API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Upload CSV (Start Scraping)",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "multipart/form-data"
+            }
+          ],
+          "body": {
+            "mode": "formdata",
+            "formdata": [
+              {
+                "key": "file",
+                "type": "file",
+                "src": "sample.csv"
+              }
+            ]
+          },
+          "url": {
+            "raw": "http://localhost:8000/upload",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["upload"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Check Scraping Status",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/status/{{task_id}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["status", "{{task_id}}"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get Scraping Results",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "http://localhost:8000/results/{{task_id}}",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["results", "{{task_id}}"]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  

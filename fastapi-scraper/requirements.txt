@@ -1,0 +1,25 @@
+# FastAPI and related libraries
+fastapi
+uvicorn[standard]
+
+# Database (PostgreSQL + SQLAlchemy)
+sqlalchemy
+psycopg2-binary
+alembic
+
+# Redis for Celery task queue
+celery[redis]
+
+# Scraping dependencies
+beautifulsoup4
+requests
+
+# Pydantic for data validation
+pydantic
+
+# Testing
+pytest
+httpx
+
+# Monitoring
+prometheus_client

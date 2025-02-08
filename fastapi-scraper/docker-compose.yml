@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi_app
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgres:password@db:5432/fastapi_db"
+      REDIS_URL: "redis://redis_queue:6379/0"
+  
+  redis:
+    image: "redis:alpine"
+    container_name: redis_queue
+    restart: always
+    ports:
+      - "6379:6379"
+
+  db:
+    image: "postgres:latest"
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fastapi_db
+    ports:
+      - "5432:5432"
+
+  worker:
+    build: .
+    container_name: celery_worker
+    command: ["celery", "-A", "app.tasks.tasks", "worker", "--loglevel=info"]
+    depends_on:
+      - redis
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgres:password@db:5432/fastapi_db"
+      REDIS_URL: "redis://redis_queue:6379/0"
+
+  flower:
+    image: mher/flower
+    container_name: celery_flower
+    command: ["flower", "--broker=redis://redis_queue:6379/0", "--port=5555"]
+    depends_on:
+      - redis
+    ports:
+      - "5555:5555"
+
